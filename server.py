@@ -1,7 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 import csv
 
-
 app = Flask(__name__)
 print(__name__)
 
@@ -9,6 +8,7 @@ print(__name__)
 @app.route('/')
 def my_home():
     return render_template('index.html')
+
 
 @app.route('/<string:page_name>')
 def html_page(page_name):
@@ -28,8 +28,8 @@ def write_to_csv(data):
         email = data["email"]
         subject = data["subject"]
         message = data["message"]
-        csv_writer = csv.writer(database2, delimiter=',', quotechar='|',  quoting = csv.QUOTE_MINIMAL)
-        csv_writer.writerow([email,subject,message])
+        csv_writer = csv.writer(database2, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow([email, subject, message])
 
 
 @app.route('/submit_form', methods=['POST', 'GET'])
@@ -43,26 +43,3 @@ def submit_form():
             return 'Did not save to database'
     else:
         return 'something went wrong. Try again'
-
-
-# @app.route('/index.html')
-# def my_home2():
-#     return render_template('/index.html')
-#
-# @app.route('/works.html')
-# def work():
-#     return render_template('./works.html')
-#
-#
-# @app.route('/about.html')
-# def about_me():
-#     return render_template('./about.html')
-#
-#
-# @app.route('/contact.html')
-# def contact():
-#     return render_template('./contact.html')
-#
-# @app.route('/components.html')
-# def components():
-#     return render_template('./components.html')
